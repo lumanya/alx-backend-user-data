@@ -3,12 +3,31 @@
 Return the log message obfuscate
 """
 
+import os
 import re
 import logging
 from typing import List
+from mysql.connector.connection import MySQLConnection
 
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
+
+
+def get_db() -> MySQLConnection:
+    """Return a connector to the databse"""
+    user = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    password = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    db_name = os.getenv('PERSONAL_DATA_DB_NAME')
+
+    connection = MySQLConnection(
+        user=user,
+        password=password,
+        host=host,
+        database=db_name
+    )
+
+    return connection
 
 
 def filter_datum(fields, redaction, message, separator):
