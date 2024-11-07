@@ -30,7 +30,8 @@ def get_db() -> MySQLConnection:
     return connection
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """Return the log message obfuscate"""
     for field in fields:
         message = re.sub(f"{field}=.*?{separator}",
@@ -71,7 +72,10 @@ def get_logger() -> logging.Logger:
     return logger
 
 
-def main():
+def main() -> None:
+    """
+    Main function to retrieve and log user data from the database
+    """
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
