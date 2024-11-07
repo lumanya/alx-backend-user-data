@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Return the log message obfuscate
+This module contains a function that retrieves and filters
+data from a database and logs it using a custom formatter.
 """
 
 import os

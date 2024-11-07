@@ -1,5 +1,6 @@
 """
 Encrypts the password using bcrypt
+and checks if the password is valid
 """
 import bcrypt
 
